@@ -22,11 +22,11 @@ services:
     environment:
       TZ: "America/New_York"
       WEBPASSWORD: "password"
-      DNS1: "172.20.0.7#5053"
+      DNS1: "172.20.0.7#53"
       DNS2: "no"
     volumes:
       - "$PWD/etc-pihole/:/etc/pihole/"
-      - "$PWD/etc-dnsmasq.d/:/etc/dnsmasq.d/"
+      #- "$PWD/etc-dnsmasq.d/:/etc/dnsmasq.d/"
     restart: always
 
   unbound:
@@ -36,8 +36,7 @@ services:
       dns_net:
         ipv4_address: 172.20.0.7
     volumes:
-      - "$PWD/unbound/unbound.conf:/opt/unbound/etc/unbound/unbound.conf"
-      - "$PWD/unbound/resolv.conf:/etc/resolv.conf"
+      - "$PWD/unbound/forward-records.conf:/opt/unbound/etc/unbound/forward-records.conf"
     healthcheck:
       disable: true
     restart: always
